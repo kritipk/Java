@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        
+        
+        Scanner sc = new Scanner(System.in);
+        String a = sc.next();
+        String b = sc.next();
+        
+        System.out.println(a.length() + b.length());
+        
+        
+        int i=0,j=0;
+        boolean flag = false;
+        while(i<a.length()&&j<b.length()) {
+            if(a.charAt(i) > b.charAt(j)) {
+                flag=true;
+                break;
+            }
+            else if(a.charAt(i) < b.charAt(j)){
+                break;
+            }
+            i++;j++;
+        }
+        if(flag == true) 
+            System.out.println("Yes");
+        else 
+            System.out.println("No");
+            
+            
+        String str1 = a.substring(0, 1).toUpperCase() + a.substring(1);
+        String str2 = b.substring(0, 1).toUpperCase() + b.substring(1);
+        System.out.print(str1 + " " + str2);     
+        
+    }
+}
+
+
+
+
