@@ -1,0 +1,30 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+public class Main {
+    public static void main(String[] args){
+
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> numberedLines = new ArrayList<String>();
+
+        boolean inputAvailable = true;
+        int lineCounter = 0;
+
+        while(inputAvailable){
+
+            if (scanner.hasNextLine()) {
+                String input = scanner.nextLine();
+                lineCounter++;
+                String output = lineCounter + " " + input;
+                numberedLines.add(output);
+            }
+            else {
+                inputAvailable = false;
+            }
+
+        }
+        scanner.close();
+        for (int i = 0; i != numberedLines.size(); i++){
+            System.out.println(numberedLines.get(i));
+        }
+    }
+}
