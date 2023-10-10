@@ -1,0 +1,25 @@
+class Solution {
+    public String reversePrefix(String word, char ch) {
+        // declare right pointer at index of char ch
+        int right = word.indexOf(ch);
+        // if there is no ch in word return word
+        if(right == -1) {
+            return word;
+        }
+        // declare StringBuilder to store our result string
+        StringBuilder result = new StringBuilder(word);
+        // declare left pointer at 0 index
+        int left = 0;
+        // iterate over prefix until pointers meet in middle
+        for(; right > left; right--) {
+            // set right char to left pointer position
+            result.setCharAt(left, word.charAt(right));
+            // set left char to right pointer position
+            result.setCharAt(right, word.charAt(left));
+            // increment left pointer
+            left++;
+        }
+        // return string created from StringBuilder
+        return result.toString();
+    }
+}
