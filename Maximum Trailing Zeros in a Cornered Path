@@ -1,0 +1,73 @@
+ 
+ public static int maxTrailingZeros(int[][] grid) {
+        /*calculate how many 5 and 2 grid[i][j] has
+        int[][] five = new int[grid.length][grid[0].length];
+        int[][] two = new int[grid.length][grid[0].length];
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                int origin = grid[i][j];
+                while (origin % 5 == 0 && origin != 0) {
+                    five[i][j] += 1;
+                    origin = origin / 5;
+                }
+                origin = grid[i][j];
+                while (origin % 2 == 0 && origin != 0) {
+                    two[i][j] += 1;
+                    origin = origin / 2;
+                }
+            }
+        }
+        // use four dp array to save the sum of 5 and 2 in two directions
+        int[][] dp51 = new int[grid.length][grid[0].length];
+        int[][] dp21 = new int[grid.length][grid[0].length];
+        int[][] dp52 = new int[grid.length][grid[0].length];
+        int[][] dp22 = new int[grid.length][grid[0].length];
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (i == 0) {
+                    dp51[i][j] = five[i][j];
+                    dp21[i][j] = two[i][j];
+                } else {
+                    dp51[i][j] = dp51[i - 1][j] + five[i][j];
+                    dp21[i][j] = dp21[i - 1][j] + two[i][j];
+                }
+                if (j == 0) {
+                    dp52[i][j] = five[i][j];
+                    dp22[i][j] = two[i][j];
+                } else {
+                    dp52[i][j] = dp52[i][j - 1] + five[i][j];
+                    dp22[i][j] = dp22[i][j - 1] + two[i][j];
+                }
+            }
+        }
+        
+        //we have 4 choices and combine any of 2
+        int max = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                int fiveNum = dp51[i][j];
+                int twoNum = dp21[i][j];
+
+                int fiveNum2 = dp52[i][j];
+                int twoNum2 = dp22[i][j];
+
+                int fiveNum1 = dp51[grid.length - 1][j] - dp51[i][j] + five[i][j];
+                int twoNum1 = dp21[grid.length - 1][j] - dp21[i][j] + two[i][j];
+
+                int fiveNum3 = dp52[i][grid[0].length - 1] - dp52[i][j] + five[i][j];
+                int twoNum3 = dp22[i][grid[0].length - 1] - dp22[i][j] + two[i][j];
+
+
+                max = Math.max(max, Math.min(fiveNum + fiveNum1 - five[i][j], twoNum + twoNum1 - two[i][j]));
+                max = Math.max(max, Math.min(fiveNum + fiveNum2 - five[i][j], twoNum + twoNum2 - two[i][j]));
+                max = Math.max(max, Math.min(fiveNum + fiveNum3 - five[i][j], twoNum + twoNum3 - two[i][j]));
+                max = Math.max(max, Math.min(fiveNum2 + fiveNum1 - five[i][j], twoNum2 + twoNum1 - two[i][j]));
+                max = Math.max(max, Math.min(fiveNum3 + fiveNum1 - five[i][j], twoNum3 + twoNum1 - two[i][j]));
+                max = Math.max(max, Math.min(fiveNum2 + fiveNum3 - five[i][j], twoNum2 + twoNum3 - two[i][j]));
+            }
+        }
+        return max;
+    }
+ 
+ 
