@@ -1,0 +1,26 @@
+class Solution {
+    public int largestInteger(int num) {
+        int[] ans = new int[10];
+        int x = num;
+        while (x != 0) {
+            ans[x % 10]++;
+            x /= 10;
+        }
+        x = num;
+        int result = 0;
+        int t = 1;
+        while (x != 0) {
+            int v = x % 10;
+            x /= 10;
+            for (int y = 0; y < 10; ++y) {
+                if (((v ^ y) & 1) == 0 && ans[y] > 0) {
+                    ans[y]--;
+                    result += y * t;
+                    t *= 10;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+}
