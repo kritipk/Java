@@ -1,0 +1,20 @@
+class MyHashMap {
+    int mpp[];
+
+    public MyHashMap() {
+        mpp = new int[1000001];
+        Arrays.fill(mpp, -1);    
+    }
+    
+    public void put(int key, int value) {
+        mpp[key] = value;
+    }
+    
+    public int get(int key) {
+        return mpp[key];
+    }
+    
+    public void remove(int key) {
+        mpp[key] = -1;
+    }
+}
